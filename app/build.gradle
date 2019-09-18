@@ -7,6 +7,11 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 28
+
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.cnx.newsfeed"
         minSdkVersion 21
