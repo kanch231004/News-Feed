@@ -14,7 +14,6 @@ interface NewsService {
     @GET("/v2/top-headlines")
     suspend fun getTopNewsList(
 
-
         @Query("apiKey") apiKey: String, @Query("page") page : Int
         ,@Query("pageSize") pageSize : Int,
         @Query("q") source: String = "bitcoin"): Response<NewsListResponse>

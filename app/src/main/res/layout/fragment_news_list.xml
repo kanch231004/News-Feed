@@ -3,27 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/headlines"
-            android:gravity="center_horizontal"
-            android:textAlignment="center"
-            app:titleTextColor="@android:color/white"
-            android:id="@+id/toolbar"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/rvNewsList"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/rv_news_list_items"
             android:layout_below="@+id/toolbar"
             />
-    </RelativeLayout>
+    </FrameLayout>
 
 </layout>
