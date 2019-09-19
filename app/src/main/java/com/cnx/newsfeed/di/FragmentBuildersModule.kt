@@ -1,17 +1,18 @@
 package com.cnx.newsfeed.di
 
 
+import com.cnx.newsfeed.news.NewsListFragment
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
-   /* @ContributesAndroidInjector
-    abstract fun contributeThemeFragment(): LegoThemeFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeLegoSetsFragment(): LegoSetsFragment
-
+    abstract fun contributeThemeFragment(): NewsListFragment
+ /*
     @ContributesAndroidInjector
-    abstract fun contributeLegoSetFragment(): LegoSetFragment*/
+    abstract fun contributeLegoSetsFragment(): NewsDetailFragment*/
+
 }

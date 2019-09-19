@@ -6,12 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.cnx.newsfeed.api.NewsListModel
 import com.cnx.newsfeed.data.dao.NewsDao
 
 /**
  * The Room database for this app
  */
-@Database(entities = [],
+@Database(entities = [NewsListModel::class],
         version = 1, exportSchema = false)
 @TypeConverters()
 abstract class AppDatabase : RoomDatabase() {
@@ -41,8 +42,6 @@ abstract class AppDatabase : RoomDatabase() {
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                          /*  val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                            WorkManager.getInstance(context).enqueue(request)*/
                         }
                     })
                     .build()

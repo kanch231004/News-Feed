@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class NewsListResponse(
@@ -14,11 +15,8 @@ data class NewsListResponse(
     @SerializedName("status")
     private var status: String? = null,
     @Expose
-    @SerializedName("sortBy")
-    private var sortBy: String? = null,
-    @Expose
     @SerializedName("articles")
-    internal var articles: List<NewsListModel>)
+    internal var articles: List<NewsListModel>) : Serializable
 
 
 

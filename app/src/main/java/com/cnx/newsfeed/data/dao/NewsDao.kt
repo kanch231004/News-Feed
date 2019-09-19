@@ -8,15 +8,12 @@ import androidx.room.Query
 import com.cnx.newsfeed.api.NewsListModel
 
 @Dao
-abstract class NewsDao {
+interface NewsDao {
+
+    @Query("Select * from NewsListModel")
+    fun getNews() : LiveData<List<NewsListModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(newsList : List<NewsListModel>)
-
-
-    @Query("Select * From NewsListModel")
-    abstract fun getNewsList() : LiveData<List<NewsListModel>>
-
-
+    fun insertAll(feeds: List<NewsListModel>)
 
 }

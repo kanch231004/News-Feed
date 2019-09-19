@@ -3,6 +3,7 @@ package com.cnx.newsfeed.di
 import android.app.Application
 import com.cnx.newsfeed.api.NewsService
 import com.cnx.newsfeed.data.AppDatabase
+import com.cnx.newsfeed.data.newsSet.NewsRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -21,10 +22,10 @@ class AppModule {
             converterFactory: GsonConverterFactory
     ) = provideService(okhttpClient, converterFactory, NewsService::class.java)
 
-   /* @Singleton
+    @Singleton
     @Provides
-    fun provideNewsSetRemoteDataSource(newsService: NewsService)
-            = NewsSetRemoteDataSource(newsService)*/
+    fun provideNewsRemoteDataSource(newsService: NewsService)
+            = NewsRemoteDataSource(newsService)
 
 /*
     @Singleton
@@ -32,14 +33,13 @@ class AppModule {
     fun provideNewsThemeRemoteDataSource(legoService: NewsService)
             = NewsThemeRemoteDataSource(legoService)*/
 
-   /* @NewsApi
+    @NewsApi
     @Provides
     fun providePrivateOkHttpClient(
-            upstreamClient: OkHttpClient
+        upstreamClient: OkHttpClient
     ): OkHttpClient {
-        return upstreamClient.newBuilder()
-                .addInterceptor(AuthInterceptor(BuildConfig.API_DEVELOPER_TOKEN)).build()
-    }*/
+        return upstreamClient.newBuilder().build()
+    }
 
     @Singleton
     @Provides

@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/navDetailFragment"
-        android:name="com.cnx.newsfeed.news.NavDetailFragment"
+        android:name="com.cnx.newsfeed.news.NewsDetailFragment"
         android:label="NavDetailFragment" />
 </navigation>
