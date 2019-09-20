@@ -21,28 +21,26 @@
     android:layout_height="250dp"
     android:onClick="@{clickListener}">
 
-
-    <ImageView
-        android:id="@+id/ivNews"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/gradient"
-        app:imageFromUrl="@{newsItem.urlToImage}"
-        android:background="@drawable/gradient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-        <View
-            android:layout_height="match_parent"
+        <androidx.cardview.widget.CardView
+            android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:background="@drawable/gradient"
+            android:id="@+id/cvGradient"
+            app:cardCornerRadius="@dimen/margin_xsmall"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:foreground="@drawable/gradient"
+                android:src="@drawable/gradient"
+                app:imageFromUrl="@{newsItem.urlToImage}"/>
+
+        </androidx.cardview.widget.CardView>
 
 
 
@@ -51,11 +49,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_xsmall"
+        android:elevation="@dimen/margin_xsmall"
         android:fontFamily="@font/robotoslab_regular"
         android:textColor="@android:color/white"
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_small"
-        app:layout_constraintBottom_toBottomOf="@+id/ivNews"
+        app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
         app:layout_constraintStart_toEndOf="@+id/tvChannel"
         tools:text="2019-10-09"
         android:text="@{newsItem.publishedAt}"
@@ -67,18 +66,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_medium"
-        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_xsmall"
         android:maxLines="2"
         android:text="@{newsItem.title}"
+        android:elevation="@dimen/margin_xsmall"
 
         android:fontFamily="@font/robotoslab_regular"
         tools:text="Boeing dedicates 100 million to victims of 737 max crashes"
         app:layout_constraintBottom_toTopOf="@+id/tvChannel"
-        app:layout_constraintEnd_toEndOf="@+id/ivNews"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ivNews" />
+        app:layout_constraintEnd_toEndOf="@+id/cvGradient"
+        app:layout_constraintStart_toStartOf="@+id/cvGradient" />
 
     <TextView
         android:id="@+id/tvChannel"
@@ -88,12 +87,13 @@
         android:layout_marginBottom="@dimen/margin_small"
         tools:text="CNN"
         android:text="@{newsItem.author}"
+        android:elevation="@dimen/margin_xsmall"
 
         android:fontFamily="@font/robotoslab_regular"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_xsmall"
-        app:layout_constraintBottom_toBottomOf="@+id/ivNews"
-        app:layout_constraintStart_toStartOf="@+id/ivNews" />
+        app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
+        app:layout_constraintStart_toStartOf="@+id/cvGradient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -19,9 +19,6 @@ class NewsApp : Application(), HasActivityInjector {
         super.onCreate()
 
         if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
-/*
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-        else Timber.plant(CrashReportingTree())*/
 
         AppInjector.init(this)
     }

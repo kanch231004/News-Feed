@@ -7,6 +7,7 @@
     <dimen name="text_xsmall">12sp</dimen>
     <dimen name="text_small">14sp</dimen>
 
+    <dimen name="margin_xsmall">8dp</dimen>
     <dimen name="margin_small">12dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
