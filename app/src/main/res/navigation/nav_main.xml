@@ -7,12 +7,20 @@
         android:id="@+id/newsListFragment"
         android:name="com.cnx.newsfeed.news.NewsListFragment"
         android:label="NewsListFragment" >
+        <argument
+            android:name="newsItem"
+            app:argType="com.cnx.newsfeed.api.NewsListModel" />
         <action
-            android:id="@+id/action_newsListFragment_to_navDetailFragment"
-            app:destination="@id/navDetailFragment" />
+            android:id="@+id/action_newsListFragment_to_newsDetailFragment"
+            app:destination="@id/newsDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/navDetailFragment"
+        android:id="@+id/newsDetailFragment"
         android:name="com.cnx.newsfeed.news.NewsDetailFragment"
-        android:label="NavDetailFragment" />
+        android:label="NewsDetailFragment" >
+        <argument
+            android:name="newsItem"
+            app:argType="com.cnx.newsfeed.api.NewsListModel" />
+    </fragment>
+
 </navigation>

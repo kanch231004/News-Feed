@@ -27,6 +27,7 @@ class NewsListFragment : Fragment(), Injectable {
     ): View? {
 
         viewModel = injectViewModel(viewModelFactory)
+
         val binding = FragmentNewsListBinding.inflate(inflater,container,false)
         context ?: return binding.root
 

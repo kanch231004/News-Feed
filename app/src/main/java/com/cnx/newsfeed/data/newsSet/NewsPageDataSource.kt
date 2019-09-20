@@ -53,6 +53,7 @@ class NewsPageDataSource @Inject constructor(
             val response : com.cnx.newsfeed.data.Result<NewsListResponse> = remoteDataSource.fetchNewsList(apiKey, page, pageSize)
 
             if (response.status == com.cnx.newsfeed.data.Result.Status.SUCCESS) {
+
                 val results = response.data?.articles ?: emptyList()
                 newsDao.insertAll(results )
                 callback(results)

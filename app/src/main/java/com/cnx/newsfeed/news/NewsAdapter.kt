@@ -3,6 +3,7 @@ package com.cnx.newsfeed.news
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallb
 
         holder.apply {
 
-            bind(createOnClickListener(newsItem.id, newsItem.title), newsItem)
+            bind(createOnClickListener( newsItem), newsItem)
             itemView.tag = newsItem
         }
     }
@@ -29,11 +30,12 @@ class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallb
                 LayoutInflater.from(parent.context), parent, false))
     }
 
-    private fun createOnClickListener(id: Int, name: String?): View.OnClickListener {
+    private fun createOnClickListener( newItem: NewsListModel): View.OnClickListener {
         return View.OnClickListener {
 
-          /*  val direction = NewsFragmentDirections.actionThemeFragmentToSetsFragment(id, name)
-            it.findNavController().navigate(direction)*/
+          val direction = NewsListFragmentDirections
+              .actionNewsListFragmentToNewsDetailFragment(newItem)
+            it.findNavController().navigate(direction)
         }
     }
 
@@ -43,7 +45,7 @@ class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallb
 
         fun bind(listener: View.OnClickListener, item: NewsListModel) {
             binding.apply {
-               /* clickListener = listener*/
+                clickListener = listener
                 newsItem = item
 
                 executePendingBindings()
@@ -55,7 +57,7 @@ class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallb
 private class DiffCallback : DiffUtil.ItemCallback<NewsListModel>() {
 
     override fun areItemsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.title == newItem.title
     }
 
     override fun areContentsTheSame(oldItem: NewsListModel, newItem: NewsListModel): Boolean {

@@ -23,10 +23,10 @@ data class NewsListResponse(
 @Entity
 data class NewsListModel  (
 
-    @PrimaryKey(autoGenerate = true)  var id : Int,
+    @PrimaryKey
     @Expose
     @SerializedName("title")
-    var title: String? = null,
+    var title: String = "",
     @Expose
     @SerializedName("urlToImage")
     var urlToImage: String? = null,
@@ -41,4 +41,4 @@ data class NewsListModel  (
     var url: String? = null,
     @Expose
     @SerializedName("publishedAt")
-    var publishedAt: String? = null)
+    var publishedAt: String? = null) : Serializable

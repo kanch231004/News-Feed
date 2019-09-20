@@ -20,7 +20,8 @@
     <style name="TextViewDetails" >
 
         <item name="android:textSize">@dimen/text_small</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/colorDarkGray</item>
+
 
     </style>
 

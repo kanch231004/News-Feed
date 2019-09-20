@@ -11,7 +11,7 @@ interface NewsService {
     }
 
 
-    @GET("/v2/top-headlines")
+    @GET("/v2/everything")
     suspend fun getTopNewsList(
 
         @Query("apiKey") apiKey: String, @Query("page") page : Int

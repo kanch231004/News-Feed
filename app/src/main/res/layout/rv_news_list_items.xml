@@ -7,12 +7,19 @@
         <variable
             name="newsItem"
             type="com.cnx.newsfeed.api.NewsListModel" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
     </data>
+
+
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_margin="@dimen/margin_small"
-    android:layout_height="250dp">
+    android:layout_height="250dp"
+    android:onClick="@{clickListener}">
 
 
     <ImageView
@@ -22,8 +29,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/gradient"
         app:imageFromUrl="@{newsItem.urlToImage}"
-        android:layout_margin="@dimen/margin_small"
-
+        android:background="@drawable/gradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +50,7 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_small"
+        android:textSize="@dimen/text_xsmall"
         android:fontFamily="@font/robotoslab_regular"
         android:textColor="@android:color/white"
         android:layout_marginStart="@dimen/margin_small"
@@ -85,7 +91,7 @@
 
         android:fontFamily="@font/robotoslab_regular"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/text_small"
+        android:textSize="@dimen/text_xsmall"
         app:layout_constraintBottom_toBottomOf="@+id/ivNews"
         app:layout_constraintStart_toStartOf="@+id/ivNews" />
 
