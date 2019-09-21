@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cnx.newsfeed.api.NewsListModel
 import com.cnx.newsfeed.databinding.RvNewsListItemsBinding
@@ -13,7 +13,7 @@ import com.cnx.newsfeed.databinding.RvNewsListItemsBinding
 /**
  * Adapter for the [RecyclerView] in [NewsFragment].
  */
-class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallback()) {
+class NewsAdapter : PagedListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val newsItem = getItem(position)
@@ -30,11 +30,11 @@ class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallb
                 LayoutInflater.from(parent.context), parent, false))
     }
 
-    private fun createOnClickListener( newItem: NewsListModel): View.OnClickListener {
+    private fun createOnClickListener( newItem: NewsListModel?): View.OnClickListener {
         return View.OnClickListener {
 
           val direction = NewsListFragmentDirections
-              .actionNewsListFragmentToNewsDetailFragment(newItem)
+              .actionNewsListFragmentToNewsDetailFragment(newItem!!)
             it.findNavController().navigate(direction)
         }
     }
@@ -43,7 +43,7 @@ class NewsAdapter : ListAdapter<NewsListModel, NewsAdapter.ViewHolder>(DiffCallb
         private val binding: RvNewsListItemsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: NewsListModel) {
+        fun bind(listener: View.OnClickListener, item: NewsListModel?) {
             binding.apply {
                 clickListener = listener
                 newsItem = item

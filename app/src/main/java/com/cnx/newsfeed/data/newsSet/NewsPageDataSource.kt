@@ -2,9 +2,7 @@ package com.cnx.newsfeed.data.newsSet
 
 import androidx.paging.PageKeyedDataSource
 import com.cnx.newsfeed.api.NewsListModel
-import com.cnx.newsfeed.api.NewsListResponse
 import com.cnx.newsfeed.common.apiKey
-import com.cnx.newsfeed.data.Result
 import com.cnx.newsfeed.data.dao.NewsDao
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -25,9 +23,12 @@ class NewsPageDataSource @Inject constructor(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, NewsListModel>
     ) {
-        fetchData(1, params.requestedLoadSize) {
-            callback.onResult(it, null, 2)
-        }
+
+            fetchData(1, params.requestedLoadSize) {
+                callback.onResult(it, null, 2)
+            }
+
+
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsListModel>) {
@@ -50,7 +51,8 @@ class NewsPageDataSource @Inject constructor(
 
         coroutineScope.launch(getJobErrorHandler()) {
 
-            val response : com.cnx.newsfeed.data.Result<NewsListResponse> = remoteDataSource.fetchNewsList(apiKey, page, pageSize)
+            val response = remoteDataSource.fetchNewsList(apiKey,page, pageSize)
+
 
             if (response.status == com.cnx.newsfeed.data.Result.Status.SUCCESS) {
 
@@ -58,9 +60,11 @@ class NewsPageDataSource @Inject constructor(
                 newsDao.insertAll(results )
                 callback(results)
 
-            } else if (response.status == Result.Status.ERROR) {
+            } else if (response.status == com.cnx.newsfeed.data.Result.Status.ERROR) {
                 postError(response.message!!)
             }
+
+
         }
     }
 

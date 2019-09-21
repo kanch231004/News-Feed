@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.cnx.newsfeed.api.NewsListModel
-import com.cnx.newsfeed.common.apiKey
 import com.cnx.newsfeed.data.dao.NewsDao
-import com.cnx.newsfeed.data.resultLiveData
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,31 +14,24 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
                                          private val newsRemoteDataSource: NewsRemoteDataSource) {
 
 
-    val news =
-        resultLiveData( databaseQuery = { newsDao.getNews() },
-            networkCall = {newsRemoteDataSource.fetchNewsList(apiKey,1,25)},
-            saveCallResult =  {newsDao.insertAll(it.articles)})
+
+    fun observePagedNews(connectivityAvailable : Boolean, coroutineScope: CoroutineScope) =
+        if (connectivityAvailable)
+            observeRemotePagedNews(coroutineScope)
+        else observeLocalPagedNews()
 
 
-  /*  fun observePagedNews(id: String) = resultLiveData(
-        databaseQuery = { newsDao.getNews() },
-        networkCall = { newsRemoteDataSource.fetchSet(id) },
-        saveCallResult = { newsDao.insertAll(it) })
-        .distinctUntilChanged()*/
-
-
-   /* private fun observeLocalPagedSets(themeId: Int? = null): LiveData<PagedList<LegoSet>> {
+    private fun observeLocalPagedNews(): LiveData<PagedList<NewsListModel>> {
 
         val dataSourceFactory =
-            if (themeId == null) dao.getPagedLegoSets()
-            else newsDao.getPagedLegoSetsByTheme(themeId)
+            newsDao.getPagedNews()
 
         return LivePagedListBuilder(dataSourceFactory,
-            LegoSetPageDataSourceFactory.pagedListConfig()).build()
-    }*/
+            NewsPageDataSourceFactory.pagedListConfig()).build()
+    }
 
 
-    private fun observeRemotePagedSets( ioCoroutineScope: CoroutineScope)
+    private fun observeRemotePagedNews( ioCoroutineScope: CoroutineScope)
             : LiveData<PagedList<NewsListModel>> {
 
         val dataSourceFactory = NewsPageDataSourceFactory(newsRemoteDataSource,
@@ -51,7 +42,7 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
     }
 
 
-    companion object {
+   /* companion object {
 
         const val PAGE_SIZE = 25
 
@@ -64,5 +55,5 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
                 instance
                     ?: NewsRepository(dao, legoSetRemoteDataSource).also { instance = it }
             }
-    }
+    }*/
 }

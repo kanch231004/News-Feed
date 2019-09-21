@@ -11,11 +11,11 @@ import javax.inject.Inject
  */
 
 
-class NewsRemoteDataSource @Inject constructor(private val service: NewsService) : BaseDataSource() {
+class NewsRemoteDataSource @Inject constructor( val service: NewsService) : BaseDataSource() {
 
-    suspend fun fetchNewsList(apiKey : String, page : Int, pageSize : Int) : Result<NewsListResponse> {
+    suspend fun fetchNewsList(apiKey : String, page : Int, pageSize : Int ) : Result<NewsListResponse> {
 
-        return getResult { service.getTopNewsList(apiKey, 1, 25) }
+        return getResult { service.getTopNewsList(apiKey, page,pageSize) }
     }
 
 }

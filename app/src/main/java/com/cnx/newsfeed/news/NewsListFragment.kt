@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.cnx.newsfeed.data.Result
+import com.cnx.newsfeed.commonUtil.ConnectivityUtil
 import com.cnx.newsfeed.databinding.FragmentNewsListBinding
 import com.cnx.newsfeed.di.Injectable
 import com.cnx.newsfeed.di.injectViewModel
@@ -28,6 +28,8 @@ class NewsListFragment : Fragment(), Injectable {
 
         viewModel = injectViewModel(viewModelFactory)
 
+        viewModel.connectivityAvailable = ConnectivityUtil.isConnected(context!!)
+
         val binding = FragmentNewsListBinding.inflate(inflater,container,false)
         context ?: return binding.root
 
@@ -45,25 +47,9 @@ class NewsListFragment : Fragment(), Injectable {
 
         viewModel.newsList.observe(viewLifecycleOwner, Observer {
 
-            when (it.status) {
+            Log.e("ListFragment"," page list "+it)
+            adapter.submitList(it)
 
-                Result.Status.SUCCESS -> {
-
-                    it.data?.let { adapter.submitList(it) }
-                }
-
-                Result.Status.ERROR -> {
-
-                   Log.d("NewsList"," error message ${it.message}")
-
-                }
-
-                Result.Status.LOADING -> {
-
-
-                    Log.d("NewsList","loading message")
-                }
-            }
         })
 
     }
