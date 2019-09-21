@@ -1,5 +1,6 @@
 package com.cnx.newsfeed.api
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
@@ -41,4 +42,13 @@ data class NewsListModel  (
     var url: String? = null,
     @Expose
     @SerializedName("publishedAt")
-    var publishedAt: String? = null) : Serializable
+    var publishedAt: String? = null,
+
+    @Embedded @SerializedName("source") val source : Source ) : Serializable
+
+data class Source(
+    @SerializedName("id")
+    var id: String?,
+    @SerializedName("name")
+    var name: String? = ""
+)

@@ -19,6 +19,7 @@ class NewsListFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: NewsViewModel
+    private var isConnected : Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +30,8 @@ class NewsListFragment : Fragment(), Injectable {
         viewModel = injectViewModel(viewModelFactory)
 
         Log.d("Connectivity","${ConnectivityUtil.isConnected(context!!)}")
-        viewModel.connectivityAvailable = ConnectivityUtil.isConnected(context!!)
+
+        isConnected = ConnectivityUtil.isConnected(context!!)
 
         val binding = FragmentNewsListBinding.inflate(inflater,container,false)
         context ?: return binding.root
@@ -46,7 +48,7 @@ class NewsListFragment : Fragment(), Injectable {
 
     private fun subscribeUI(binding: FragmentNewsListBinding, adapter: NewsAdapter) {
 
-        viewModel.newsList.observe(viewLifecycleOwner, Observer {
+        viewModel.newsList(connectivityAvailable = isConnected).observe(viewLifecycleOwner, Observer {
 
             Log.e("ListFragment"," page list "+it)
             adapter.submitList(it)

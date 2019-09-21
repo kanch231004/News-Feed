@@ -44,21 +44,7 @@
 
 
 
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_xsmall"
-        android:elevation="@dimen/margin_xsmall"
-        android:fontFamily="@font/robotoslab_regular"
-        android:textColor="@android:color/white"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_small"
-        app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
-        app:layout_constraintStart_toEndOf="@+id/tvChannel"
-        tools:text="2019-10-09"
-        android:text="@{newsItem.publishedAt.substring(0,10)}"
-        />
+
 
     <TextView
         android:id="@+id/textView"
@@ -86,7 +72,7 @@
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_small"
         tools:text="CNN"
-        android:text="@{newsItem.author}"
+        android:text="@{newsItem.source.name}"
         android:elevation="@dimen/margin_xsmall"
 
         android:fontFamily="@font/robotoslab_regular"
@@ -94,6 +80,22 @@
         android:textSize="@dimen/text_xsmall"
         app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
         app:layout_constraintStart_toStartOf="@+id/cvGradient" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_xsmall"
+        android:elevation="@dimen/margin_xsmall"
+        android:fontFamily="@font/robotoslab_regular"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
+        app:layout_constraintStart_toEndOf="@+id/tvChannel"
+        tools:text="2019-10-09"
+        android:text="@{newsItem.publishedAt.substring(0,10)}"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

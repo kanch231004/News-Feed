@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_medium"
-        tools:text="@{newsDetail.author}"
+        tools:text="@{newsDetail.source.name}"
 
         android:textColor="@color/colorGray"
         android:textSize="@dimen/text_medium"
