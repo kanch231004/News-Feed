@@ -28,6 +28,7 @@ class NewsListFragment : Fragment(), Injectable {
 
         viewModel = injectViewModel(viewModelFactory)
 
+        Log.d("Connectivity","${ConnectivityUtil.isConnected(context!!)}")
         viewModel.connectivityAvailable = ConnectivityUtil.isConnected(context!!)
 
         val binding = FragmentNewsListBinding.inflate(inflater,container,false)

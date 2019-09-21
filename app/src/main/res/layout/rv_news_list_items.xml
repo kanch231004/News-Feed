@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
         app:layout_constraintStart_toEndOf="@+id/tvChannel"
         tools:text="2019-10-09"
-        android:text="@{newsItem.publishedAt}"
+        android:text="@{newsItem.publishedAt.substring(0,10)}"
         />
 
     <TextView

@@ -9,22 +9,28 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/appbar"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:background="@android:color/black"
+           >
 
 
-            <androidx.appcompat.widget.Toolbar
+            <TextView
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title="@string/headlines"
-                android:gravity="center_horizontal"
-                android:textAlignment="center"
-                app:titleTextColor="@android:color/white"
-                android:id="@+id/toolbar"/>
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:fontFamily="@font/robotoslab_bold"
+                android:gravity="center"
+                android:text="@string/headlines"
+                android:letterSpacing=".1"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_large"
+                />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </androidx.appcompat.widget.Toolbar>
 
         <fragment
             android:id="@+id/nav_fragment"
