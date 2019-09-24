@@ -8,7 +8,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
-    annotation 'com.cnx.newsfeed.OpenClass'
+    annotation 'com.cnx.newsfeed.testing.OpenClass'
 }
 
 android {
@@ -107,7 +107,6 @@ dependencies {
     androidTestImplementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     androidTestImplementation "com.google.android.material:material:$rootProject.materialVersion"
 
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"
@@ -117,6 +116,11 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     androidTestImplementation "org.mockito:mockito-android:$rootProject.mockitoAndroidVersion"
+
+    androidTestImplementation ('androidx.test.espresso:espresso-core:' + rootProject.espressoVersion) {
+        exclude group:'com.androidx.support'
+
+    }
 }
 
 task fullCoverageReport(type: JacocoReport) {

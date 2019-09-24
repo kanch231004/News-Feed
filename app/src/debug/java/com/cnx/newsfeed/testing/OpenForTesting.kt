@@ -1,4 +1,4 @@
-package com.cnx.newsfeed
+package com.cnx.newsfeed.testing
 
 /**
  * This annotation allows us to open some classes for mocking purposes while they are final in

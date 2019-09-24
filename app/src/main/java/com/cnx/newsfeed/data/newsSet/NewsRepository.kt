@@ -5,12 +5,14 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.cnx.newsfeed.api.NewsListModel
 import com.cnx.newsfeed.data.dao.NewsDao
+import com.cnx.newsfeed.testing.OpenForTesting
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
+@OpenForTesting
 class NewsRepository @Inject constructor(private val newsDao: NewsDao,
                                          private val newsRemoteDataSource: NewsRemoteDataSource) {
 
