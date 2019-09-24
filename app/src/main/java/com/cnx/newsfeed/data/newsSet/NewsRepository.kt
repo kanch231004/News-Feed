@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 class NewsRepository @Inject constructor(private val newsDao: NewsDao,
                                          private val newsRemoteDataSource: NewsRemoteDataSource) {
@@ -42,18 +43,4 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
     }
 
 
-   /* companion object {
-
-        const val PAGE_SIZE = 25
-
-        // For Singleton instantiation
-        @Volatile
-        private var instance: NewsRepository? = null
-
-        fun getInstance(dao: NewsDao, legoSetRemoteDataSource: NewsRemoteDataSource) =
-            instance ?: synchronized(this) {
-                instance
-                    ?: NewsRepository(dao, legoSetRemoteDataSource).also { instance = it }
-            }
-    }*/
 }

@@ -45,7 +45,7 @@ class NewsServiceTest {
     }
 
     @Test
-    fun requestLegoSets() {
+    fun requestNews() {
         runBlocking {
             enqueueResponse("news.json")
             val resultResponse = service.getTopNewsList().body()
@@ -57,7 +57,7 @@ class NewsServiceTest {
     }
 
     @Test
-    fun getLegoSetsResponse() {
+    fun getNewsResponse() {
         runBlocking {
             enqueueResponse("news.json")
             val resultResponse = service.getTopNewsList().body()
@@ -68,33 +68,6 @@ class NewsServiceTest {
         }
     }
 
-    /* @Test
-     fun getLegoSetsPagination() {
-         runBlocking {
-             enqueueResponse("news.json")
-             val resultResponse = service.getTopNewsList().body()
-
-             assertNull(resultResponse!!.)
-             assertNull(resultResponse.previous)
-         }
-     }*/
-
-
-    /*  @Test
-      fun getLegoSetItem() {
-          runBlocking {
-              enqueueResponse("news.json")
-              val resultResponse = service.getTopNewsList().body()
-              val legoSets = resultResponse!!.articles
-
-              val legoSet = legoSets[0]
-              assertThat(legoSet.title, `is`("Man Claims He Invented Bitcoin, Is Ordered to Pay Billions in Bitcoin"))
-              assertThat(legoSet.description, `is`("A man who has insisted he is the man behind the pseudonymous identity of Satoshi Nakamoto, inventor of bitcoin, has been ordered to pay half of his cryptocurrency bounty to a man believed to be his former colleague. Read more..."))
-              assertThat(legoSet.publishedAt, `is`("2019-08-28T16:50:00Z"))
-              assertThat(legoSet.source.name, `is`("Gizmodo.com"))
-              assertThat(legoSet.urlToImage, `is`("https://i.kinja-img.com/gawker-media/image/upload/s--H8pqYMUW--/c_fill,fl_progressive,g_center,h_900,q_80,w_1600/ug34lxszlekl8efydtj3.png"))
-          }
-      }*/
 
     private fun enqueueResponse(fileName: String, headers: Map<String, String> = emptyMap()) {
         val inputStream = javaClass.classLoader
