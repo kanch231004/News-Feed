@@ -44,7 +44,7 @@ data class NewsListModel  (
     @SerializedName("publishedAt")
     var publishedAt: String? = null,
 
-    @Embedded @SerializedName("source") val source : Source ) : Serializable
+    @Embedded @SerializedName("source") val source : Source? = null ) : Serializable
 
 data class Source(
     @SerializedName("id")
