@@ -19,6 +19,7 @@
     android:layout_width="match_parent"
     android:layout_margin="@dimen/margin_small"
     android:layout_height="250dp"
+    android:id="@+id/clNews"
     android:onClick="@{clickListener}">
 
         <androidx.cardview.widget.CardView
@@ -44,8 +45,6 @@
 
 
 
-
-
     <TextView
         android:id="@+id/textView"
         style="@style/TextViewHeadLines"
@@ -53,12 +52,11 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_medium"
         android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_xsmall"
         android:maxLines="2"
         android:text="@{newsItem.title}"
         android:elevation="@dimen/margin_xsmall"
-
         android:fontFamily="@font/robotoslab_regular"
         tools:text="Boeing dedicates 100 million to victims of 737 max crashes"
         app:layout_constraintBottom_toTopOf="@+id/tvChannel"

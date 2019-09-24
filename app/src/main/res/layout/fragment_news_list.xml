@@ -15,8 +15,8 @@
             android:id="@+id/rvNewsList"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/rv_news_list_items"
-            android:layout_below="@+id/toolbar"
             />
+
     </FrameLayout>
 
 </layout>

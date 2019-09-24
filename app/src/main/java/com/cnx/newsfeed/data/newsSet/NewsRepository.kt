@@ -31,7 +31,7 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
     }
 
 
-    private fun observeRemotePagedNews( ioCoroutineScope: CoroutineScope)
+    private fun observeRemotePagedNews(ioCoroutineScope: CoroutineScope)
             : LiveData<PagedList<NewsListModel>> {
 
         val dataSourceFactory = NewsPageDataSourceFactory(newsRemoteDataSource,

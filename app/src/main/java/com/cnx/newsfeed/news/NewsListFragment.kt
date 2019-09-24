@@ -20,6 +20,7 @@ class NewsListFragment : Fragment(), Injectable {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: NewsViewModel
     private var isConnected : Boolean = true
+    private lateinit var  binding : FragmentNewsListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +34,7 @@ class NewsListFragment : Fragment(), Injectable {
 
         isConnected = ConnectivityUtil.isConnected(context!!)
 
-        val binding = FragmentNewsListBinding.inflate(inflater,container,false)
+        binding = FragmentNewsListBinding.inflate(inflater,container,false)
         context ?: return binding.root
 
         val adapter = NewsAdapter()
@@ -50,8 +51,11 @@ class NewsListFragment : Fragment(), Injectable {
 
         viewModel.newsList(connectivityAvailable = isConnected).observe(viewLifecycleOwner, Observer {
 
+
             Log.e("ListFragment"," page list "+it)
             adapter.submitList(it)
+
+
 
         })
 
