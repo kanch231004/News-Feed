@@ -2,7 +2,6 @@ package com.cnx.newsfeed
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.cnx.newsfeed.data.newsSet.NewsRepository
-import com.cnx.newsfeed.news.NewsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.junit.Rule
@@ -22,7 +21,6 @@ class NewsViewModelTest {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private val repository = mock(NewsRepository::class.java)
-    private var viewModel = NewsViewModel(repository, coroutineScope)
 
     @Test
     fun testNull() {

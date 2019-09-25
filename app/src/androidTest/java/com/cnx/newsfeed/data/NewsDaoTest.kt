@@ -41,7 +41,4 @@ class NewsDaoTest : DbTest() {
         assertThat(list[1], equalTo(setB))
     }
 
-   /* @Test fun testGetLegoSet() {
-        assertThat(getValue(newsDao.getNews()), equalTo(setA))
-    }*/
 }

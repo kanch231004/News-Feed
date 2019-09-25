@@ -47,7 +47,6 @@ class NewsAdapter : PagedListAdapter<NewsListModel, NewsAdapter.ViewHolder>(Diff
             binding.apply {
                 clickListener = listener
                 newsItem = item
-
                 executePendingBindings()
             }
         }
