@@ -1,4 +1,4 @@
-package com.elifox.legocatalog.repository
+package com.cnx.newsfeed.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.cnx.newsfeed.api.NewsService

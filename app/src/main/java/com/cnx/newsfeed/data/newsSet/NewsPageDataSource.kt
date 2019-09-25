@@ -1,6 +1,8 @@
 package com.cnx.newsfeed.data.newsSet
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
+import com.cnx.newsfeed.api.NetworkState
 import com.cnx.newsfeed.api.NewsListModel
 import com.cnx.newsfeed.common.apiKey
 import com.cnx.newsfeed.data.dao.NewsDao
@@ -19,11 +21,13 @@ class NewsPageDataSource @Inject constructor(
 ) : PageKeyedDataSource<Int,NewsListModel>() {
 
 
+    val networkState = MutableLiveData<NetworkState>()
+
     override fun loadInitial (
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, NewsListModel>
     ) {
-
+        networkState.postValue(NetworkState.LOADING)
             fetchData(1, params.requestedLoadSize) {
                 callback.onResult(it, null, 2)
             }
@@ -32,7 +36,7 @@ class NewsPageDataSource @Inject constructor(
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsListModel>) {
-
+        networkState.postValue(NetworkState.LOADING)
         val page = params.key
         fetchData(page, params.requestedLoadSize) {
             callback.onResult(it, page + 1)
@@ -59,8 +63,10 @@ class NewsPageDataSource @Inject constructor(
                 val results = response.data?.articles ?: emptyList()
                 newsDao.insertAll(results )
                 callback(results)
+                networkState.postValue(NetworkState.LOADED)
 
             } else if (response.status == com.cnx.newsfeed.data.Result.Status.ERROR) {
+                networkState.postValue(NetworkState.error(response.message ?: "unknown err"))
                 postError(response.message!!)
             }
 

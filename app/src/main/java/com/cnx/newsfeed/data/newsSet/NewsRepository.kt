@@ -1,8 +1,10 @@
 package com.cnx.newsfeed.data.newsSet
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import com.cnx.newsfeed.api.Data
+import com.cnx.newsfeed.api.NetworkState
 import com.cnx.newsfeed.api.NewsListModel
 import com.cnx.newsfeed.data.dao.NewsDao
 import com.cnx.newsfeed.testing.OpenForTesting
@@ -18,30 +20,43 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
 
 
 
-    fun observePagedNews(connectivityAvailable : Boolean, coroutineScope: CoroutineScope) =
-        if (connectivityAvailable)
+    fun observePagedNews(connectivityAvailable : Boolean, coroutineScope: CoroutineScope) : Data<NewsListModel> {
+
+        return if (connectivityAvailable)
             observeRemotePagedNews(coroutineScope)
         else observeLocalPagedNews()
 
 
-    private fun observeLocalPagedNews(): LiveData<PagedList<NewsListModel>> {
+    }
+
+
+    private fun observeLocalPagedNews(): Data<NewsListModel> {
 
         val dataSourceFactory =
             newsDao.getPagedNews()
 
-        return LivePagedListBuilder(dataSourceFactory,
-            NewsPageDataSourceFactory.pagedListConfig()).build()
+
+        val createLD = MutableLiveData<NetworkState>()
+
+        createLD.postValue(NetworkState.LOADED)
+
+        return Data(LivePagedListBuilder(dataSourceFactory,
+            NewsPageDataSourceFactory.pagedListConfig()).build(),createLD)
     }
 
 
     private fun observeRemotePagedNews(ioCoroutineScope: CoroutineScope)
-            : LiveData<PagedList<NewsListModel>> {
+            : Data<NewsListModel> {
 
         val dataSourceFactory = NewsPageDataSourceFactory(newsRemoteDataSource,
             newsDao, ioCoroutineScope)
 
-        return LivePagedListBuilder(dataSourceFactory,
-            NewsPageDataSourceFactory.pagedListConfig()).build()
+        val networkState = Transformations.switchMap(dataSourceFactory.liveData) {
+            it.networkState
+        }
+
+        return Data(LivePagedListBuilder(dataSourceFactory,
+            NewsPageDataSourceFactory.pagedListConfig()).build(),networkState)
     }
 
 

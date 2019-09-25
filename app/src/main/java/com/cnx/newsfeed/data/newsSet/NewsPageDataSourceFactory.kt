@@ -14,7 +14,7 @@ class NewsPageDataSourceFactory @Inject constructor(
         private val dao: NewsDao,
         private val scope: CoroutineScope) : DataSource.Factory<Int, NewsListModel>() {
 
-    private val liveData = MutableLiveData<NewsPageDataSource>()
+     val liveData = MutableLiveData<NewsPageDataSource>()
 
     override fun create(): DataSource<Int, NewsListModel> {
 
