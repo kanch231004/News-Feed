@@ -25,6 +25,12 @@ class NewsListFragment : Fragment(), Injectable {
     private var isConnected : Boolean = true
     private lateinit var  binding : FragmentNewsListBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
