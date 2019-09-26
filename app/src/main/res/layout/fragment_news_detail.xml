@@ -70,7 +70,7 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{newsDetail.publishedAt}"
+        android:text="@{newsDetail.publishedAt.substring(0,10)}"
         app:layout_constraintBottom_toTopOf="@+id/tvDescDetail"
         android:layout_marginBottom="@dimen/margin_medium"
         android:textColor="@color/colorGray"
