@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.cnx.newsfeed.api.Status
@@ -24,18 +25,24 @@ class NewsListFragment : Fragment(), Injectable {
     private lateinit var viewModel: NewsViewModel
     private var isConnected : Boolean = true
     private lateinit var  binding : FragmentNewsListBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    val newsViewModel : NewsViewModel by viewModels { viewModelFactory }
 
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentNewsListBinding.inflate(inflater,container,false)
+        context ?: return binding.root
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel = injectViewModel(viewModelFactory)
 
@@ -46,30 +53,24 @@ class NewsListFragment : Fragment(), Injectable {
         if (!isConnected)
             Toast.makeText(context?.applicationContext,"No internet connection!",Toast.LENGTH_SHORT).show()
 
-
-        binding = FragmentNewsListBinding.inflate(inflater,container,false)
-        context ?: return binding.root
-
         val adapter = NewsAdapter()
 
         binding.rvNewsList.adapter = adapter
 
-        subscribeUI(binding,adapter)
 
-        return binding.root
+        subscribeUI(adapter)
     }
 
 
-    private fun subscribeUI(binding: FragmentNewsListBinding, adapter: NewsAdapter) {
+    private fun subscribeUI(adapter: NewsAdapter) {
 
         val data = viewModel.newsList(isConnected)
 
-        data.networkState.observe(viewLifecycleOwner, Observer {
+        data?.networkState?.observe(viewLifecycleOwner, Observer {
 
             Log.e(" NLF"," status "+it.status)
             when(it.status) {
                 Status.RUNNING -> {
-
                     progressBar.visibility = View.VISIBLE
 
                 }
@@ -87,7 +88,7 @@ class NewsListFragment : Fragment(), Injectable {
 
         })
 
-        data.pagedList.observe(viewLifecycleOwner, Observer {
+        data?.pagedList?.observe(viewLifecycleOwner, Observer {
 
             adapter.submitList(it)
 

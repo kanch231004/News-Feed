@@ -12,7 +12,7 @@
             app:argType="com.cnx.newsfeed.api.NewsListModel" />
         <action
             android:id="@+id/action_newsListFragment_to_newsDetailFragment"
-            app:destination="@id/newsDetailFragment" />
+            app:destination="@id/newsDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/newsDetailFragment"

@@ -1,6 +1,5 @@
 package com.cnx.newsfeed.news
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.cnx.newsfeed.api.Data
 import com.cnx.newsfeed.api.NewsListModel
@@ -15,15 +14,16 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository,
                                         @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope): ViewModel() {
 
 
+      var newsList : Data<NewsListModel>? = null
 
+    fun newsList(connectivityAvailable : Boolean) : Data<NewsListModel>? {
 
+        if (newsList == null) {
+            newsList = repository.observePagedNews(connectivityAvailable, ioCoroutineScope)
 
-    fun newsList(connectivityAvailable : Boolean) : Data<NewsListModel> {
+        }
 
-        Log.d("isConnected ","${connectivityAvailable}")
-
-        return repository.observePagedNews(connectivityAvailable, ioCoroutineScope)
-
+        return  newsList
 
     }
 

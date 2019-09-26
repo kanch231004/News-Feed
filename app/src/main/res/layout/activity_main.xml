@@ -9,8 +9,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
         <fragment
             android:id="@+id/nav_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -20,7 +18,6 @@
             app:navGraph="@navigation/nav_main"/>
 
     </LinearLayout>
-
 
 
 </layout>
