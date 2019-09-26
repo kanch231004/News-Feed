@@ -13,6 +13,8 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+
     android:layout_height="match_parent">
 
     <ImageView
@@ -97,6 +99,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.813" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_circle_translucent"
+        android:layout_margin="@dimen/margin_xsmall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/margin_small"
+        app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

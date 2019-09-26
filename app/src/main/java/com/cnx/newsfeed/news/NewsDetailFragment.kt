@@ -20,6 +20,12 @@ class NewsDetailFragment : Fragment() {
 
         val binding = FragmentNewsDetailBinding.inflate(inflater,container,false)
 
+        binding.ivBack.setOnClickListener {
+
+            activity?.supportFragmentManager?.popBackStack()
+        }
+
+
         val newsModel = args.newsItem
         binding.newsDetail = newsModel
 
