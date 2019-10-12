@@ -11,8 +11,5 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeThemeFragment(): NewsListFragment
- /*
-    @ContributesAndroidInjector
-    abstract fun contributeLegoSetsFragment(): NewsDetailFragment*/
 
 }

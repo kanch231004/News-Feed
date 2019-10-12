@@ -27,12 +27,6 @@ class AppModule {
     fun provideNewsRemoteDataSource(newsService: NewsService)
             = NewsRemoteDataSource(newsService)
 
-/*
-    @Singleton
-    @Provides
-    fun provideNewsThemeRemoteDataSource(legoService: NewsService)
-            = NewsThemeRemoteDataSource(legoService)*/
-
     @NewsApi
     @Provides
     fun providePrivateOkHttpClient(
@@ -49,10 +43,6 @@ class AppModule {
     @Provides
     fun provideNewsSetDao(db: AppDatabase) = db.getNewsListDao()
 
-/*
-    @Singleton
-    @Provides
-    fun provideNewsThemeDao(db: AppDatabase) = db.legoThemeDao()*/
 
     @CoroutineScopeIO
     @Provides

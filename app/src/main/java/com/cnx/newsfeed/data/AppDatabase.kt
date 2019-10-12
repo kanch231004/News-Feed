@@ -19,9 +19,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getNewsListDao(): NewsDao
 
-    //abstract fun legoThemeDao(): LegoThemeDao
-
-
     companion object {
 
         // For Singleton instantiation
@@ -38,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
 
-            return Room.databaseBuilder(context, AppDatabase::class.java, "legocatalog-db")
+            return Room.databaseBuilder(context, AppDatabase::class.java, "news-db")
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
