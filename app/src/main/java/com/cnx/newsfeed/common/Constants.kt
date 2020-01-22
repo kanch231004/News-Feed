@@ -1,5 +1,7 @@
 package com.cnx.newsfeed.common
 
-val apiKey = "58d482512a2e430fa414efe8c8747fc1"
+import com.cnx.newsfeed.BuildConfig
+
+val apiKey = BuildConfig.API_DEVELOPER_TOKEN
 val PAGE_SIZE = 20
 val KEYWORD_BITCOIN = "bitcoin"
