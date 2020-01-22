@@ -15,3 +15,6 @@ An app which fetches news from an open source news api, having offline persisten
 * __Live Data__ : To notify view for change
 * __Dagger__ : For dependency injection
 * __Language__ : Kotlin
+
+# API Key
+Get your api key from here https://newsapi.org/docs/authentication
