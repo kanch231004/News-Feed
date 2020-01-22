@@ -8,7 +8,7 @@ import com.cnx.newsfeed.data.Result
 import javax.inject.Inject
 
 /**
- * Works with the Lego API to get data.
+ * Works with the News API to get data.
  */
 
 
