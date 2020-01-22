@@ -14,15 +14,11 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() , HasSupportFragmentInjector{
 
-
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     private lateinit var navController: NavController
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment>  = dispatchingAndroidInjector
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

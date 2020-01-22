@@ -24,6 +24,9 @@ abstract class BaseDataSource {
     }
 
     private fun <T> error(message: String): Result<T> {
+
+        /** We can deserialize error model (in case we get error msg from server)
+         * and pass the message */
         Timber.e(message)
         return Result.error("Network call has failed for a following reason: $message")
     }

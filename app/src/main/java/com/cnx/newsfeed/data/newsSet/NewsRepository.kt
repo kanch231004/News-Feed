@@ -12,13 +12,10 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
 @OpenForTesting
 class NewsRepository @Inject constructor(private val newsDao: NewsDao,
                                          private val newsRemoteDataSource: NewsRemoteDataSource) {
-
-
 
     fun observePagedNews(connectivityAvailable : Boolean, coroutineScope: CoroutineScope) : Data<NewsListModel> {
 
@@ -26,15 +23,12 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
             observeRemotePagedNews(coroutineScope)
         else observeLocalPagedNews()
 
-
     }
-
 
     private fun observeLocalPagedNews(): Data<NewsListModel> {
 
         val dataSourceFactory =
             newsDao.getPagedNews()
-
 
         val createLD = MutableLiveData<NetworkState>()
 
@@ -43,7 +37,6 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
         return Data(LivePagedListBuilder(dataSourceFactory,
             NewsPageDataSourceFactory.pagedListConfig()).build(),createLD)
     }
-
 
     private fun observeRemotePagedNews(ioCoroutineScope: CoroutineScope)
             : Data<NewsListModel> {
@@ -58,6 +51,4 @@ class NewsRepository @Inject constructor(private val newsDao: NewsDao,
         return Data(LivePagedListBuilder(dataSourceFactory,
             NewsPageDataSourceFactory.pagedListConfig()).build(),networkState)
     }
-
-
 }

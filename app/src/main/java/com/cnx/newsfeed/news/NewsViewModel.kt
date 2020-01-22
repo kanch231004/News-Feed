@@ -10,21 +10,19 @@ import kotlinx.coroutines.cancel
 import javax.inject.Inject
 
 
-class NewsViewModel @Inject constructor(private val repository: NewsRepository,
-                                        @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope): ViewModel() {
+class NewsViewModel @Inject constructor(
+    private val repository: NewsRepository,
+    @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope
+) : ViewModel() {
 
+    private var newsList: Data<NewsListModel>? = null
 
-      var newsList : Data<NewsListModel>? = null
-
-    fun newsList(connectivityAvailable : Boolean) : Data<NewsListModel>? {
+    fun newsList(connectivityAvailable: Boolean): Data<NewsListModel>? {
 
         if (newsList == null) {
             newsList = repository.observePagedNews(connectivityAvailable, ioCoroutineScope)
-
         }
-
-        return  newsList
-
+        return newsList
     }
 
 
@@ -32,6 +30,4 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository,
         super.onCleared()
         ioCoroutineScope.cancel()
     }
-
-
 }
