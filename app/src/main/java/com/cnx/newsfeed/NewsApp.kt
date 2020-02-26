@@ -9,9 +9,6 @@ import dagger.android.HasActivityInjector
 import javax.inject.Inject
 
 class NewsApp : Application(), HasActivityInjector {
-
-
-
     @Inject
     public lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 

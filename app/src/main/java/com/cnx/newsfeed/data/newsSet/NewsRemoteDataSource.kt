@@ -11,12 +11,9 @@ import javax.inject.Inject
  * Works with the News API to get data.
  */
 
-
 class NewsRemoteDataSource @Inject constructor( val service: NewsService) : BaseDataSource() {
 
     suspend fun fetchNewsList(apiKey : String, page : Int, pageSize : Int ) : Result<NewsListResponse> {
-
         return getResult { service.getTopNewsList(apiKey, page,pageSize, KEYWORD_BITCOIN) }
     }
-
 }

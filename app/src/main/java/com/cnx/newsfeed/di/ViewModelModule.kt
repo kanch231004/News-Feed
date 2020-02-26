@@ -15,7 +15,6 @@ abstract class ViewModelModule {
     @ViewModelKey(NewsViewModel::class)
     abstract fun bindThemeViewModel(viewModel: NewsViewModel): ViewModel
 
-
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }

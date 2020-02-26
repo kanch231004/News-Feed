@@ -18,21 +18,18 @@ class NewsPageDataSource @Inject constructor(
     private val newsDao: NewsDao,
     private val coroutineScope: CoroutineScope
 
-) : PageKeyedDataSource<Int,NewsListModel>() {
-
+) : PageKeyedDataSource<Int, NewsListModel>() {
 
     val networkState = MutableLiveData<NetworkState>()
 
-    override fun loadInitial (
+    override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, NewsListModel>
     ) {
         networkState.postValue(NetworkState.LOADING)
-            fetchData(1, params.requestedLoadSize) {
-                callback.onResult(it, null, 2)
-            }
-
-
+        fetchData(1, params.requestedLoadSize) {
+            callback.onResult(it, null, 2)
+        }
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsListModel>) {
@@ -55,13 +52,11 @@ class NewsPageDataSource @Inject constructor(
 
         coroutineScope.launch(getJobErrorHandler()) {
 
-            val response = remoteDataSource.fetchNewsList(apiKey,page, pageSize)
-
+            val response = remoteDataSource.fetchNewsList(apiKey, page, pageSize)
 
             if (response.status == com.cnx.newsfeed.data.Result.Status.SUCCESS) {
-
                 val results = response.data?.articles ?: emptyList()
-                newsDao.insertAll(results )
+                newsDao.insertAll(results)
                 callback(results)
                 networkState.postValue(NetworkState.LOADED)
 
@@ -69,8 +64,6 @@ class NewsPageDataSource @Inject constructor(
                 networkState.postValue(NetworkState.error(response.message ?: "unknown err"))
                 postError(response.message!!)
             }
-
-
         }
     }
 
@@ -80,8 +73,6 @@ class NewsPageDataSource @Inject constructor(
 
     private fun postError(message: String) {
         Timber.e("An error happened: $message")
-       // networkState.postValue(NetworkState.FAILED)
+        // networkState.postValue(NetworkState.FAILED)
     }
-
-
 }

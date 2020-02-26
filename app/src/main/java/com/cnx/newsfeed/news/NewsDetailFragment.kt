@@ -10,7 +10,7 @@ import com.cnx.newsfeed.databinding.FragmentNewsDetailBinding
 
 class NewsDetailFragment : Fragment() {
 
-    val args : NewsDetailFragmentArgs by navArgs()
+    private val args : NewsDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,19 +21,12 @@ class NewsDetailFragment : Fragment() {
         val binding = FragmentNewsDetailBinding.inflate(inflater,container,false)
 
         binding.ivBack.setOnClickListener {
-
             activity?.supportFragmentManager?.popBackStack()
         }
-
 
         val newsModel = args.newsItem
         binding.newsDetail = newsModel
 
         return binding.root
     }
-
-
-
-
-
 }

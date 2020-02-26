@@ -27,8 +27,6 @@ class NewsListFragment : Fragment(), Injectable {
     private lateinit var  binding : FragmentNewsListBinding
     val newsViewModel : NewsViewModel by viewModels { viewModelFactory }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +35,6 @@ class NewsListFragment : Fragment(), Injectable {
 
         binding = FragmentNewsListBinding.inflate(inflater,container,false)
         context ?: return binding.root
-
         return binding.root
     }
 
@@ -45,8 +42,6 @@ class NewsListFragment : Fragment(), Injectable {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = injectViewModel(viewModelFactory)
-
-        Log.d("Connectivity","${ConnectivityUtil.isConnected(context!!)}")
 
         isConnected = ConnectivityUtil.isConnected(context!!)
 
@@ -57,10 +52,8 @@ class NewsListFragment : Fragment(), Injectable {
 
         binding.rvNewsList.adapter = adapter
 
-
         subscribeUI(adapter)
     }
-
 
     private fun subscribeUI(adapter: NewsAdapter) {
 
@@ -68,32 +61,24 @@ class NewsListFragment : Fragment(), Injectable {
 
         data?.networkState?.observe(viewLifecycleOwner, Observer {
 
-            Log.e(" NLF"," status "+it.status)
             when(it.status) {
+
                 Status.RUNNING -> {
                     progressBar.visibility = View.VISIBLE
-
                 }
-
                 Status.FAILED -> {
-
                     progressBar.visibility = View.GONE
                     // Handle fail state
                 }
                 Status.SUCCESS -> {
-
                     progressBar.visibility = View.GONE
                 }
             }
-
         })
 
         data?.pagedList?.observe(viewLifecycleOwner, Observer {
 
             adapter.submitList(it)
-
         })
-
     }
-
 }

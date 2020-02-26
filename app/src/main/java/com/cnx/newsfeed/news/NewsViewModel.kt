@@ -25,7 +25,6 @@ class NewsViewModel @Inject constructor(
         return newsList
     }
 
-
     override fun onCleared() {
         super.onCleared()
         ioCoroutineScope.cancel()

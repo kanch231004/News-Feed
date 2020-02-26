@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() , HasSupportFragmentInjector{
         navController = findNavController(R.id.nav_fragment)
     }
 
-
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp()
     }
