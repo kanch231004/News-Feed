@@ -8,7 +8,7 @@
     <data>
         <variable
             name="newsDetail"
-            type="com.cnx.newsfeed.api.NewsListModel" />
+            type="com.kanchanpal.newsfeed.api.NewsListModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

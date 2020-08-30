@@ -6,7 +6,7 @@
     <data>
         <variable
             name="newsItem"
-            type="com.cnx.newsfeed.api.NewsListModel" />
+            type="com.kanchanpal.newsfeed.api.NewsListModel" />
 
         <variable
             name="clickListener"
