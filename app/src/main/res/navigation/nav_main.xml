@@ -5,22 +5,22 @@
 
     <fragment
         android:id="@+id/newsListFragment"
-        android:name="com.cnx.newsfeed.news.NewsListFragment"
+        android:name="com.kanchanpal.newsfeed.news.NewsListFragment"
         android:label="NewsListFragment" >
         <argument
             android:name="newsItem"
-            app:argType="com.cnx.newsfeed.api.NewsListModel" />
+            app:argType="com.kanchanpal.newsfeed.api.NewsListModel" />
         <action
             android:id="@+id/action_newsListFragment_to_newsDetailFragment"
             app:destination="@id/newsDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/newsDetailFragment"
-        android:name="com.cnx.newsfeed.news.NewsDetailFragment"
+        android:name="com.kanchanpal.newsfeed.news.NewsDetailFragment"
         android:label="NewsDetailFragment" >
         <argument
             android:name="newsItem"
-            app:argType="com.cnx.newsfeed.api.NewsListModel" />
+            app:argType="com.kanchanpal.newsfeed.api.NewsListModel" />
     </fragment>
 
 </navigation>

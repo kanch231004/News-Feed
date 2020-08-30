@@ -8,7 +8,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
-    annotation 'com.cnx.newsfeed.testing.OpenClass'
+    annotation 'com.kanchanpal.newsfeed.testing.OpenClass'
 }
 
 android {
@@ -19,12 +19,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.cnx.newsfeed"
+        applicationId "com.kanchanpal.newsfeed"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.cnx.newsfeed.util.AppTestRunner"
+        testInstrumentationRunner "com.kanchanpal.newsfeed.util.AppTestRunner"
 
         /** Replace with your api_token
          * eg: Your api token is 58d482512a2e430fa414efe8c8747fc2
