@@ -20,7 +20,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getNewsListDao(): NewsDao
 
     companion object {
-
         // For Singleton instantiation
         @Volatile
         private var instance: AppDatabase? = null
@@ -32,7 +31,6 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         // Create and pre-populate the database. See this article for more details:
-
         private fun buildDatabase(context: Context): AppDatabase {
 
             return Room.databaseBuilder(context, AppDatabase::class.java, "news-db")
@@ -40,8 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
                         }
-                    })
-                    .build()
+                    }).build()
         }
     }
 }

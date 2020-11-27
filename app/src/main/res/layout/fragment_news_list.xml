@@ -2,8 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,9 +25,7 @@
             android:text="@string/headlines"
             android:letterSpacing=".1"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_large"
-            />
-
+            android:textSize="@dimen/text_large" />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
@@ -37,17 +33,13 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/rvNewsList"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/rv_news_list_items"
-            />
-
-
+            tools:listitem="@layout/rv_news_list_items" />
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +47,5 @@
             android:id="@+id/progressBar"/>
 
     </FrameLayout>
-
     </LinearLayout>
-
 </layout>

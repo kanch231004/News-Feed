@@ -17,7 +17,6 @@ import org.junit.runners.JUnit4
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 @RunWith(JUnit4::class)
 class NewsServiceTest {
 
@@ -26,7 +25,6 @@ class NewsServiceTest {
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var service: NewsService
-
     private lateinit var mockWebServer: MockWebServer
 
     @Before
@@ -61,17 +59,17 @@ class NewsServiceTest {
         runBlocking {
             enqueueResponse("news.json")
             val resultResponse = service.getTopNewsList().body()
-            val legoSets = resultResponse!!.articles
+            val newsList = resultResponse?.articles
 
-            assertThat(resultResponse.articles.size, `is`(10))
-            assertThat(legoSets.size, `is`(10))
+            assertThat(resultResponse?.articles?.size, `is`(10))
+            assertThat(newsList?.size, `is`(10))
         }
     }
 
 
     private fun enqueueResponse(fileName: String, headers: Map<String, String> = emptyMap()) {
         val inputStream = javaClass.classLoader
-            .getResourceAsStream("api-response/$fileName")
+            ?.getResourceAsStream("api-response/$fileName")
         val source = Okio.buffer(Okio.source(inputStream))
         val mockResponse = MockResponse()
         for ((key, value) in headers) {

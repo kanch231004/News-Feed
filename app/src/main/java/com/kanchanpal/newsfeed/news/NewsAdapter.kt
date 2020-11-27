@@ -17,24 +17,19 @@ class NewsAdapter : PagedListAdapter<NewsListModel, NewsAdapter.ViewHolder>(Diff
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val newsItem = getItem(position)
-
         holder.apply {
-
             bind(createOnClickListener( newsItem), newsItem)
             itemView.tag = newsItem
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(RvNewsListItemsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false))
     }
-
     private fun createOnClickListener( newItem: NewsListModel?): View.OnClickListener {
         return View.OnClickListener {
-
           val direction = NewsListFragmentDirections
-              .actionNewsListFragmentToNewsDetailFragment(newItem!!)
+              .actionNewsListFragmentToNewsDetailFragment(newItem ?: NewsListModel())
             it.findNavController().navigate(direction)
         }
     }
@@ -47,8 +42,7 @@ class NewsAdapter : PagedListAdapter<NewsListModel, NewsAdapter.ViewHolder>(Diff
             binding.apply {
                 clickListener = listener
                 newsItem = item
-                executePendingBindings()
-            }
+                executePendingBindings() }
         }
     }
 }

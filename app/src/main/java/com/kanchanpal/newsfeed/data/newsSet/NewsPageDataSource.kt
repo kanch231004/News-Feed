@@ -5,6 +5,7 @@ import androidx.paging.PageKeyedDataSource
 import com.kanchanpal.newsfeed.api.NetworkState
 import com.kanchanpal.newsfeed.api.NewsListModel
 import com.kanchanpal.newsfeed.common.apiKey
+import com.kanchanpal.newsfeed.data.Result
 import com.kanchanpal.newsfeed.data.dao.NewsDao
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -13,11 +14,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class NewsPageDataSource @Inject constructor(
-
     private val remoteDataSource: NewsRemoteDataSource,
     private val newsDao: NewsDao,
     private val coroutineScope: CoroutineScope
-
 ) : PageKeyedDataSource<Int, NewsListModel>() {
 
     val networkState = MutableLiveData<NetworkState>()
@@ -31,7 +30,6 @@ class NewsPageDataSource @Inject constructor(
             callback.onResult(it, null, 2)
         }
     }
-
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsListModel>) {
         networkState.postValue(NetworkState.LOADING)
         val page = params.key
@@ -41,7 +39,6 @@ class NewsPageDataSource @Inject constructor(
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, NewsListModel>) {
-
         val page = params.key
         fetchData(page, params.requestedLoadSize) {
             callback.onResult(it, page - 1)
@@ -49,20 +46,16 @@ class NewsPageDataSource @Inject constructor(
     }
 
     private fun fetchData(page: Int, pageSize: Int, callback: (List<NewsListModel>) -> Unit) {
-
         coroutineScope.launch(getJobErrorHandler()) {
-
             val response = remoteDataSource.fetchNewsList(apiKey, page, pageSize)
-
-            if (response.status == com.kanchanpal.newsfeed.data.Result.Status.SUCCESS) {
+            if (response.status == Result.Status.SUCCESS) {
                 val results = response.data?.articles ?: emptyList()
                 newsDao.insertAll(results)
                 callback(results)
                 networkState.postValue(NetworkState.LOADED)
-
-            } else if (response.status == com.kanchanpal.newsfeed.data.Result.Status.ERROR) {
-                networkState.postValue(NetworkState.error(response.message ?: "unknown err"))
-                postError(response.message!!)
+            } else if (response.status == Result.Status.ERROR) {
+                networkState.postValue(NetworkState.error(response.message ?: "Unknown error"))
+                postError(response.message ?: "Unknown error")
             }
         }
     }
@@ -73,6 +66,5 @@ class NewsPageDataSource @Inject constructor(
 
     private fun postError(message: String) {
         Timber.e("An error happened: $message")
-        // networkState.postValue(NetworkState.FAILED)
     }
 }

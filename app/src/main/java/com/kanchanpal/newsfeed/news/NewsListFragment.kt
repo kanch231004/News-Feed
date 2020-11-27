@@ -31,7 +31,6 @@ class NewsListFragment : Fragment(), Injectable {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentNewsListBinding.inflate(inflater,container,false)
         context ?: return binding.root
         return binding.root
@@ -39,29 +38,20 @@ class NewsListFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel = injectViewModel(viewModelFactory)
-
-        isConnected = ConnectivityUtil.isConnected(context!!)
-
+        isConnected = ConnectivityUtil.isConnected(context)
         if (!isConnected)
             Toast.makeText(context?.applicationContext,"No internet connection!",Toast.LENGTH_SHORT).show()
 
         val adapter = NewsAdapter()
-
         binding.rvNewsList.adapter = adapter
-
         subscribeUI(adapter)
     }
 
     private fun subscribeUI(adapter: NewsAdapter) {
-
         val data = viewModel.newsList(isConnected)
-
         data?.networkState?.observe(viewLifecycleOwner, Observer {
-
             when(it.status) {
-
                 Status.RUNNING -> {
                     progressBar.visibility = View.VISIBLE
                 }
@@ -74,9 +64,7 @@ class NewsListFragment : Fragment(), Injectable {
                 }
             }
         })
-
         data?.pagedList?.observe(viewLifecycleOwner, Observer {
-
             adapter.submitList(it)
         })
     }
