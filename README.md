@@ -22,4 +22,5 @@ This application strictly follows the below architecture
 <img src = "https://github.com/kanch231004/News-Feed/blob/master/screenshots/Architecture.png" width = 450 />
 
 # API Key
-Get your api key from here https://newsapi.org/docs/authentication
+Get your api key from here https://newsapi.org/
+Follow instructions in build-gradle (app) to integrate API key to build the project.
