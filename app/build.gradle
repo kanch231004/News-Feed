@@ -26,9 +26,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "com.kanchanpal.newsfeed.util.AppTestRunner"
 
-        /** Replace with your api_token
-         * eg: Your api token is 58d482512a2e430fa414efe8c8747fc2
-         * Following line should be replaced by
+        /** Replace with your api_token which you get from https://newsapi.org
+         * For eg: Your api token is 58d482512a2e430fa414efe8c8747fc2
+         * Following line should be replaced by following, including Backslash
          * buildConfigField 'String', 'API_DEVELOPER_TOKEN', "\"58d482512a2e430fa414efe8c8747fc2\""*/
 
         buildConfigField 'String', 'API_DEVELOPER_TOKEN', "\"${api_developer_token}\""
