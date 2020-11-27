@@ -45,9 +45,8 @@ class NewsRepositoryTest {
             repository.observePagedNews(connectivityAvailable = true,
                      coroutineScope = coroutineScope)
 
-            verify(dao, never()).getNews()
+            verify(dao, never()).getPagedNews()
             verifyZeroInteractions(dao)
         }
     }
-
 }

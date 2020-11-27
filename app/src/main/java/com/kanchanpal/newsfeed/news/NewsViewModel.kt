@@ -13,7 +13,6 @@ class NewsViewModel @Inject constructor(
     private val repository: NewsRepository,
     @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope
 ) : ViewModel() {
-
     private var newsList: Data<NewsListModel>? = null
 
     fun newsList(connectivityAvailable: Boolean): Data<NewsListModel>? {

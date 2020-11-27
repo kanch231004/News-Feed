@@ -10,7 +10,6 @@ import com.kanchanpal.newsfeed.api.NewsListModel
 
 @Dao
 interface NewsDao {
-
     @Query("Select * from NewsListModel")
     fun getNews() : LiveData<List<NewsListModel>>
 
@@ -22,5 +21,4 @@ interface NewsDao {
 
     @Query("SELECT * FROM NewsListModel")
     fun getPagedNews(): DataSource.Factory<Int, NewsListModel>
-
 }

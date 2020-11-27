@@ -2,7 +2,6 @@
 <layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
         <variable
             name="newsItem"
@@ -13,9 +12,7 @@
             type="android.view.View.OnClickListener"/>
     </data>
 
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_margin="@dimen/margin_small"
     android:layout_height="250dp"
@@ -40,10 +37,7 @@
                 android:foreground="@drawable/gradient"
                 android:src="@drawable/gradient"
                 app:imageFromUrl="@{newsItem.urlToImage}"/>
-
         </androidx.cardview.widget.CardView>
-
-
 
     <TextView
         android:id="@+id/textView"
@@ -72,7 +66,6 @@
         tools:text="CNN"
         android:text="@{newsItem.source.name}"
         android:elevation="@dimen/margin_xsmall"
-
         android:fontFamily="@font/robotoslab_regular"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_xsmall"
@@ -94,7 +87,6 @@
         tools:text="2019-10-09"
         android:text="@{newsItem.publishedAt.substring(0,10)}"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

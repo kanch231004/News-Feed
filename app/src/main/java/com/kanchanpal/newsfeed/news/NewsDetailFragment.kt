@@ -17,16 +17,12 @@ class NewsDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentNewsDetailBinding.inflate(inflater,container,false)
-
         binding.ivBack.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
-
         val newsModel = args.newsItem
         binding.newsDetail = newsModel
-
         return binding.root
     }
 }

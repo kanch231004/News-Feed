@@ -13,7 +13,6 @@ import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() , HasSupportFragmentInjector{
-
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     private lateinit var navController: NavController
@@ -26,9 +25,5 @@ class MainActivity : AppCompatActivity() , HasSupportFragmentInjector{
         val binding : ActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         navController = findNavController(R.id.nav_fragment)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()
     }
 }
