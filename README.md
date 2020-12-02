@@ -1,5 +1,5 @@
 # News-Feed
-An app which fetches news from an open source news api, having offline persistence and room pagination.
+App demonstrating Clean Architecture using Coroutines and Android Jetpack Components (Room, MVVM Paging, Navigation Components and Live Data)
 
 
 # ScreenShots
@@ -23,4 +23,5 @@ This application strictly follows the below architecture
 
 # API Key
 Get your api key from here https://newsapi.org/
+
 Follow instructions in build-gradle (app) to integrate API key to build the project.
