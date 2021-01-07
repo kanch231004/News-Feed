@@ -4,7 +4,7 @@ App demonstrating Clean Architecture using Coroutines and Android Jetpack Compon
 
 # ScreenShots
 
-<img src = "https://github.com/kanch231004/News-Feed/blob/master/screenshots/NewsList%20Page.jpg" width = 350 /> <img src = "https://github.com/kanch231004/News-Feed/blob/master/screenshots/News%20Detail%20Page.jpg" width = 350/>
+<img src = "https://github.com/kanch231004/News-Feed/blob/master/screenshots/NewsList%20Page.jpg" width = 260 height = 550/> <img src = "https://github.com/kanch231004/News-Feed/blob/master/screenshots/News%20Detail%20Page.jpg" width = 260 height = 550/>
 
 # Tech-Stack
 
