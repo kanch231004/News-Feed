@@ -26,14 +26,14 @@ class NewsPageDataSource @Inject constructor(
         callback: LoadInitialCallback<Int, NewsListModel>
     ) {
         networkState.postValue(NetworkState.LOADING)
-        fetchData(1, params.requestedLoadSize) {
+        fetchData(page = 1, pageSize = params.requestedLoadSize) {
             callback.onResult(it, null, 2)
         }
     }
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, NewsListModel>) {
         networkState.postValue(NetworkState.LOADING)
         val page = params.key
-        fetchData(page, params.requestedLoadSize) {
+        fetchData(page = page, pageSize = params.requestedLoadSize) {
             callback.onResult(it, page + 1)
         }
     }
@@ -47,15 +47,17 @@ class NewsPageDataSource @Inject constructor(
 
     private fun fetchData(page: Int, pageSize: Int, callback: (List<NewsListModel>) -> Unit) {
         coroutineScope.launch(getJobErrorHandler()) {
-            val response = remoteDataSource.fetchNewsList(apiKey, page, pageSize)
-            if (response.status == Result.Status.SUCCESS) {
-                val results = response.data?.articles ?: emptyList()
-                newsDao.insertAll(results)
-                callback(results)
-                networkState.postValue(NetworkState.LOADED)
-            } else if (response.status == Result.Status.ERROR) {
-                networkState.postValue(NetworkState.error(response.message ?: "Unknown error"))
-                postError(response.message ?: "Unknown error")
+            when (val response = remoteDataSource.fetchNewsList(apiKey, page, pageSize)) {
+                is Result.Error -> {
+                    networkState.postValue(NetworkState.error(response.message ?: "Unknown error"))
+                    postError(response.message)
+                }
+                is Result.Success -> {
+                    val results = response.data.articles
+                    newsDao.insertAll(results)
+                    callback(results)
+                    networkState.postValue(NetworkState.LOADED)
+                }
             }
         }
     }
@@ -64,7 +66,7 @@ class NewsPageDataSource @Inject constructor(
         postError(e.message ?: e.toString())
     }
 
-    private fun postError(message: String) {
+    private fun postError(message: String?) {
         Timber.e("An error happened: $message")
     }
 }

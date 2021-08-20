@@ -15,7 +15,7 @@ abstract class BaseDataSource {
             val response = call()
             if (response.isSuccessful) {
                 val body = response.body()
-                if (body != null) return Result.success(body)
+                if (body != null) return Result.Success(body)
             }
             return error(" ${response.code()} ${response.message()}")
         } catch (e: Exception) {
@@ -28,7 +28,7 @@ abstract class BaseDataSource {
         /** We can deserialize error model (in case we get error msg from server)
          * and pass the message */
         Timber.e(message)
-        return Result.error("Network call has failed for a following reason: $message")
+        return Result.Error("Network call has failed for a following reason: $message")
     }
 }
 
