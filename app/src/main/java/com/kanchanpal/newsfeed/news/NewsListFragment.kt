@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.kanchanpal.newsfeed.api.Status
+import com.kanchanpal.newsfeed.api.NetworkState
 import com.kanchanpal.newsfeed.commonUtil.ConnectivityUtil
 import com.kanchanpal.newsfeed.databinding.FragmentNewsListBinding
 import com.kanchanpal.newsfeed.di.Injectable
@@ -51,15 +51,15 @@ class NewsListFragment : Fragment(), Injectable {
     private fun subscribeUI(adapter: NewsAdapter) {
         val data = viewModel.newsList(isConnected)
         data?.networkState?.observe(viewLifecycleOwner, Observer {
-            when(it.status) {
-                Status.RUNNING -> {
+            when(it) {
+                is NetworkState.LOADING -> {
                     progressBar.visibility = View.VISIBLE
                 }
-                Status.FAILED -> {
+                is NetworkState.ERROR -> {
                     progressBar.visibility = View.GONE
                     // Handle fail state
                 }
-                Status.SUCCESS -> {
+                is NetworkState.LOADED -> {
                     progressBar.visibility = View.GONE
                 }
             }

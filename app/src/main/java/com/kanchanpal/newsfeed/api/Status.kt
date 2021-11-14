@@ -1,18 +1,7 @@
 package com.kanchanpal.newsfeed.api
 
-enum class Status {
-    RUNNING,
-    SUCCESS,
-    FAILED
-}
-
-@Suppress("DataClassPrivateConstructor")
-data class NetworkState private constructor(
-    val status: Status,
-    val msg: String? = null) {
-    companion object {
-        val LOADED = NetworkState(Status.SUCCESS)
-        val LOADING = NetworkState(Status.RUNNING)
-        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
-    }
+sealed class NetworkState {
+    object LOADED : NetworkState()
+    object LOADING : NetworkState()
+    data class ERROR(val msg: String): NetworkState()
 }

@@ -42,8 +42,7 @@ object AppInjector {
 
                 }
 
-                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {
-
+                override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
                 }
 
                 override fun onActivityDestroyed(activity: Activity) {

@@ -1,5 +1,6 @@
 package com.kanchanpal.newsfeed.data.newsSet
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.kanchanpal.newsfeed.api.NetworkState
@@ -10,7 +11,6 @@ import com.kanchanpal.newsfeed.data.dao.NewsDao
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 class NewsPageDataSource @Inject constructor(
@@ -49,7 +49,7 @@ class NewsPageDataSource @Inject constructor(
         coroutineScope.launch(getJobErrorHandler()) {
             when (val response = remoteDataSource.fetchNewsList(apiKey, page, pageSize)) {
                 is Result.Error -> {
-                    networkState.postValue(NetworkState.error(response.message ?: "Unknown error"))
+                    networkState.postValue(NetworkState.ERROR(response.message ?: "Unknown error"))
                     postError(response.message)
                 }
                 is Result.Success -> {
@@ -67,6 +67,6 @@ class NewsPageDataSource @Inject constructor(
     }
 
     private fun postError(message: String?) {
-        Timber.e("An error happened: $message")
+        Log.e("NewsPageDataSource","An error happened: $message")
     }
 }
