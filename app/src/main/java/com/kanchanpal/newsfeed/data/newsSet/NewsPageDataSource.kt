@@ -10,6 +10,7 @@ import com.kanchanpal.newsfeed.data.Result
 import com.kanchanpal.newsfeed.data.dao.NewsDao
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

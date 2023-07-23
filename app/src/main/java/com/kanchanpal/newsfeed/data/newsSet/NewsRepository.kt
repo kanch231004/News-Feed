@@ -1,7 +1,7 @@
 package com.kanchanpal.newsfeed.data.newsSet
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import androidx.paging.LivePagedListBuilder
 import com.kanchanpal.newsfeed.api.Data
 import com.kanchanpal.newsfeed.api.NetworkState
@@ -39,8 +39,7 @@ class NewsRepository @Inject constructor(
     private fun observeRemotePagedNews(ioCoroutineScope: CoroutineScope): Data<NewsListModel> {
         val dataSourceFactory = NewsPageDataSourceFactory(newsRemoteDataSource,
             newsDao, ioCoroutineScope)
-
-        val networkState = Transformations.switchMap(dataSourceFactory.liveData) {
+        val networkState = dataSourceFactory.liveData.switchMap {
             it.networkState
         }
         return Data(LivePagedListBuilder(dataSourceFactory,

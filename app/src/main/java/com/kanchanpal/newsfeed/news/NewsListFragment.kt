@@ -8,23 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.kanchanpal.newsfeed.api.NetworkState
 import com.kanchanpal.newsfeed.commonUtil.ConnectivityUtil
 import com.kanchanpal.newsfeed.databinding.FragmentNewsListBinding
-import com.kanchanpal.newsfeed.di.Injectable
-import com.kanchanpal.newsfeed.di.injectViewModel
-import kotlinx.android.synthetic.main.fragment_news_list.*
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class NewsListFragment : Fragment(), Injectable {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: NewsViewModel
+@AndroidEntryPoint
+class NewsListFragment : Fragment() {
     private var isConnected : Boolean = true
     private lateinit var  binding : FragmentNewsListBinding
-    val newsViewModel : NewsViewModel by viewModels { viewModelFactory }
+    private var _binding: FragmentNewsListBinding? = null
+    val newsViewModel : NewsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +32,6 @@ class NewsListFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = injectViewModel(viewModelFactory)
         isConnected = ConnectivityUtil.isConnected(context)
         if (!isConnected)
             Toast.makeText(context?.applicationContext,"No internet connection!",Toast.LENGTH_SHORT).show()
@@ -49,18 +42,18 @@ class NewsListFragment : Fragment(), Injectable {
     }
 
     private fun subscribeUI(adapter: NewsAdapter) {
-        val data = viewModel.newsList(isConnected)
+        val data = newsViewModel.newsList(isConnected)
         data?.networkState?.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is NetworkState.LOADING -> {
-                    progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is NetworkState.ERROR -> {
-                    progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                     // Handle fail state
                 }
                 is NetworkState.LOADED -> {
-                    progressBar.visibility = View.GONE
+                    binding. progressBar.visibility = View.GONE
                 }
             }
         })
