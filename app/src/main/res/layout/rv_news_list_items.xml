@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="newsItem"
-            type="com.kanchanpal.newsfeed.api.NewsListModel" />
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_height="250dp"
+        android:id="@+id/clNews">
 
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener"/>
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_margin="@dimen/margin_small"
-    android:layout_height="250dp"
-    android:id="@+id/clNews"
-    android:onClick="@{clickListener}">
-
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
             android:layout_height="0dp"
             android:layout_width="match_parent"
             android:id="@+id/cvGradient"
@@ -29,64 +17,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+        <ImageView
                 android:id="@+id/ivNews"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:foreground="@drawable/gradient"
-                android:src="@drawable/gradient"
-                app:imageFromUrl="@{newsItem.urlToImage}"/>
-        </androidx.cardview.widget.CardView>
+                android:src="@drawable/gradient" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView"
-        style="@style/TextViewHeadLines"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_medium"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_xsmall"
-        android:maxLines="2"
-        android:text="@{newsItem.title}"
-        android:elevation="@dimen/margin_xsmall"
-        android:fontFamily="@font/robotoslab_regular"
-        tools:text="Boeing dedicates 100 million to victims of 737 max crashes"
-        app:layout_constraintBottom_toTopOf="@+id/tvChannel"
-        app:layout_constraintEnd_toEndOf="@+id/cvGradient"
-        app:layout_constraintStart_toStartOf="@+id/cvGradient" />
+            android:id="@+id/textView"
+            style="@style/TextViewHeadLines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_xsmall"
+            android:maxLines="2"
+            android:elevation="@dimen/margin_xsmall"
+            android:fontFamily="@font/robotoslab_regular"
+            tools:text="Boeing dedicates 100 million to victims of 737 max crashes"
+            app:layout_constraintBottom_toTopOf="@+id/tvChannel"
+            app:layout_constraintEnd_toEndOf="@+id/cvGradient"
+            app:layout_constraintStart_toStartOf="@+id/cvGradient" />
 
     <TextView
-        android:id="@+id/tvChannel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_small"
-        tools:text="CNN"
-        android:text="@{newsItem.source.name}"
-        android:elevation="@dimen/margin_xsmall"
-        android:fontFamily="@font/robotoslab_regular"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_xsmall"
-        app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
-        app:layout_constraintStart_toStartOf="@+id/cvGradient" />
+            android:id="@+id/tvChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            tools:text="CNN"
+            android:elevation="@dimen/margin_xsmall"
+            android:fontFamily="@font/robotoslab_regular"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_xsmall"
+            app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
+            app:layout_constraintStart_toStartOf="@+id/cvGradient" />
 
     <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_xsmall"
-        android:elevation="@dimen/margin_xsmall"
-        android:fontFamily="@font/robotoslab_regular"
-        android:textColor="@android:color/white"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_small"
-        app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
-        app:layout_constraintStart_toEndOf="@+id/tvChannel"
-        tools:text="2019-10-09"
-        android:text="@{newsItem.publishedAt.substring(0,10)}"
-        />
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_xsmall"
+            android:elevation="@dimen/margin_xsmall"
+            android:fontFamily="@font/robotoslab_regular"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="@+id/cvGradient"
+            app:layout_constraintStart_toEndOf="@+id/tvChannel"
+            tools:text="2019-10-09" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

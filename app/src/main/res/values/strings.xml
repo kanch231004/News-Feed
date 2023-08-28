@@ -3,4 +3,6 @@
     <string name="headlines">HEADLINES</string>
 
     <string name="dummy_headline">Boeing dedicates $100 millions to victim of flood . It should also be very very huge thing so we can do something</string>
+    <string name="description_details">Description details</string>
+    <string name="source_name">Source name</string>
 </resources>

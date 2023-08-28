@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -10,42 +9,42 @@
         android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/appbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:background="@android:color/black"
-        >
-        <TextView
-            android:id="@+id/toolbar"
+            android:id="@+id/appbar"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/black"
-            android:fontFamily="@font/robotoslab_bold"
-            android:gravity="center"
-            android:text="@string/headlines"
-            android:letterSpacing=".1"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_large" />
+            android:background="@android:color/black">
+
+        <TextView
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:fontFamily="@font/robotoslab_bold"
+                android:gravity="center"
+                android:text="@string/headlines"
+                android:letterSpacing=".1"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_large" />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
-
-        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rvNewsList"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/rv_news_list_items" />
+            tools:context=".MainActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rvNewsList"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/rv_news_list_items" />
+
         <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/progressBar"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progressBar" />
 
     </FrameLayout>
-    </LinearLayout>
-</layout>
+</LinearLayout>

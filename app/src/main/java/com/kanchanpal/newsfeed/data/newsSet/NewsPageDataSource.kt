@@ -55,7 +55,9 @@ class NewsPageDataSource @Inject constructor(
                 }
                 is Result.Success -> {
                     val results = response.data.articles
-                    newsDao.insertAll(results)
+                    for (result in results) {
+                        newsDao.insert(result)
+                    }
                     callback(results)
                     networkState.postValue(NetworkState.LOADED)
                 }

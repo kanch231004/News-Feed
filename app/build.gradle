@@ -1,12 +1,11 @@
 plugins {
-    id ("com.android.application")
+    id("com.android.application")
     id("jacoco")
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-allopen")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
-
 }
 
 allOpen {
@@ -15,21 +14,24 @@ allOpen {
 }
 
 android {
-    compileSdkVersion 33
+    namespace "com.kanchanpal.newsfeed"
+    compileSdk 34
 
     buildFeatures {
 
-        dataBinding true
         viewBinding = true
+        buildConfig = true
+    }
 
-        // for view binding:
-        // viewBinding true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     defaultConfig {
         applicationId "com.kanchanpal.newsfeed"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.kanchanpal.newsfeed.util.AppTestRunner"
@@ -57,6 +59,10 @@ android {
     }
 }
 
+kotlin {
+    jvmToolchain (17)
+}
+
 jacoco {
     toolVersion = "$rootProject.jacocoVersion"
 }
@@ -68,8 +74,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-android-compiler:2.47")
 
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
@@ -132,8 +138,8 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     androidTestImplementation "org.mockito:mockito-android:$rootProject.mockitoAndroidVersion"
 
-    androidTestImplementation ('androidx.test.espresso:espresso-core:' + rootProject.espressoVersion) {
-        exclude group:'com.androidx.support'
+    androidTestImplementation('androidx.test.espresso:espresso-core:' + rootProject.espressoVersion) {
+        exclude group: 'com.androidx.support'
 
     }
 }
@@ -145,8 +151,8 @@ task fullCoverageReport(type: JacocoReport) {
     dependsOn 'createDebugCoverageReport'
     dependsOn 'testDebugUnitTest'
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.getRequired().set(true)
+        html.getRequired().set(true)
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
@@ -157,19 +163,19 @@ task fullCoverageReport(type: JacocoReport) {
                       '**/*_*Factory.class',
                       '**/*ComponentImpl.class',
                       '**/*SubComponentBuilder.class']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def debugTree = fileTree(dir: "${layout.buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     sourceDirectories.from = files([mainSrc])
     classDirectories.from = files([debugTree])
-    executionData.from = fileTree(dir: "$buildDir", includes: [
+    executionData.from = fileTree(dir: "${layout.buildDirectory}", includes: [
             "jacoco/testDebugUnitTest.exec",
             "outputs/code-coverage/connected/*coverage.ec"
     ])
 }
 
 // we need all open to run tests which  a we enable only for debug builds.
-project.tasks.whenTaskAdded {
+project.tasks.configureEach {
     if (it.name == "testReleaseUnitTest") {
         it.enabled = false
     }

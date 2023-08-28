@@ -2,12 +2,15 @@ package com.kanchanpal.newsfeed.api
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.util.UUID
 
 
+@Entity
 data class NewsListResponse(
     @Expose
     @SerializedName("source")
@@ -21,11 +24,10 @@ data class NewsListResponse(
 
 @Entity
 data class NewsListModel  (
-
     @PrimaryKey
     @Expose
     @SerializedName("title")
-    var title: String = "",
+    var title: String = UUID. randomUUID().toString(),
     @Expose
     @SerializedName("urlToImage")
     var urlToImage: String? = null,
@@ -41,8 +43,8 @@ data class NewsListModel  (
     @Expose
     @SerializedName("publishedAt")
     var publishedAt: String? = null,
-
-    @Embedded @SerializedName("source") val source : Source? = null ) : Serializable
+    @Embedded
+    @SerializedName("source") var source : Source? = null ) : Serializable
 
 data class Source(
     @SerializedName("id")

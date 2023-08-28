@@ -9,16 +9,13 @@ import androidx.room.Query
 import com.kanchanpal.newsfeed.api.NewsListModel
 
 @Dao
-interface NewsDao {
+interface  NewsDao {
     @Query("Select * from NewsListModel")
-    fun getNews() : LiveData<List<NewsListModel>>
+     fun getNews() : LiveData<List<NewsListModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     suspend fun insertAll(newsList: List<NewsListModel>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(news: NewsListModel)
+    fun insert(news: NewsListModel)
 
     @Query("SELECT * FROM NewsListModel")
-    fun getPagedNews(): DataSource.Factory<Int, NewsListModel>
+     fun getPagedNews(): DataSource.Factory<Int, NewsListModel>
 }
