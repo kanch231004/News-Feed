@@ -25,7 +25,7 @@ buildscript {
         navigationVersion = '2.7.1'
         recyclerViewVersion = '1.1.0-alpha05'
         roomVersion = '2.2.5'
-        workVersion = '2.1.0'
+        workVersion = '2.7.1'
         pagingVersion = '2.1.0'
         gsonVersion = '2.8.2'
         okhttp = '3.10.0'

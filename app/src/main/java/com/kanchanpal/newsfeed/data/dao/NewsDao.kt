@@ -16,6 +16,9 @@ interface  NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(news: NewsListModel)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(newsList: List<NewsListModel>)
+
     @Query("SELECT * FROM NewsListModel")
      fun getPagedNews(): DataSource.Factory<Int, NewsListModel>
 }
